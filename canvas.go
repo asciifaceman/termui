@@ -3,7 +3,7 @@ package termui
 import (
 	"image"
 
-	"github.com/asciifaceman/termui/drawille"
+	"github.com/asciifaceman/tooey/drawille"
 )
 
 type Canvas struct {

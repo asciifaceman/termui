@@ -1,4 +1,4 @@
-module github.com/asciifaceman/termui
+module github.com/asciifaceman/tooey
 
 go 1.15
 

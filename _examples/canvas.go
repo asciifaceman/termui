@@ -7,7 +7,7 @@ import (
 	"image"
 	"log"
 
-	ui "github.com/asciifaceman/termui"
+	ui "github.com/asciifaceman/tooey"
 )
 
 func main() {

@@ -4,7 +4,7 @@ import (
 	"image"
 	"math"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 const (

@@ -7,7 +7,7 @@ package widgets
 import (
 	"image"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 type Paragraph struct {

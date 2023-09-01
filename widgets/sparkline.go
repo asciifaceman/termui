@@ -7,7 +7,7 @@ package widgets
 import (
 	"image"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 // Sparkline is like: ▅▆▂▂▅▇▂▂▃▆▆▆▅▃. The data points should be non-negative integers.

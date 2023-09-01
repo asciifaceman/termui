@@ -10,7 +10,7 @@ import (
 
 	rw "github.com/mattn/go-runewidth"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 type BarChart struct {

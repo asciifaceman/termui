@@ -1,11 +1,10 @@
-# termui reloaded
+# Tooey
 
 This is a FORK of gizak/termui see [FORK.MD](FORK.md) for details.
 
 [<img src="./_assets/demo.gif" alt="demo cast under osx 10.10; Terminal.app; Menlo Regular 12pt.)" width="100%">](./_examples/demo.go)
 
-
-termui is a cross-platform and fully-customizable terminal dashboard and widget library built on top of [termbox-go](https://github.com/nsf/termbox-go). It is inspired by [blessed-contrib](https://github.com/yaronn/blessed-contrib) and [tui-rs](https://github.com/fdehau/tui-rs) and written purely in Go.
+tooey is a cross-platform and customizable terminal dashboard and widget library built on top of [tcell](https://github.com/gdamore/tcell) (formerly termbox-go pre-fork). This project was inspired by its parent, gizak/termui.
 
 ## Features
 
@@ -17,7 +16,7 @@ termui is a cross-platform and fully-customizable terminal dashboard and widget 
 
 ## Installation
 
-`go get github.com/asciifaceman/termui`
+`go get github.com/asciifaceman/tooey`
 
 ## Hello World
 
@@ -27,8 +26,8 @@ package main
 import (
 	"log"
 
-	ui "github.com/asciifaceman/termui""
-	"github.com/asciifaceman/termui"/widgets"
+	ui "github.com/asciifaceman/tooey""
+	"github.com/asciifaceman/tooey/widgets"
 )
 
 func main() {
@@ -71,7 +70,7 @@ Run an example with `go run _examples/{example}.go` or run each example consecut
 
 ## Documentation
 
-- [wiki](https://github.com/gizak/asciifaceman/wiki)
+- [wiki](https://github.com/asciifaceman/tooey/wiki)
 
 ## License
 

@@ -12,8 +12,8 @@ import (
 	"math"
 	"time"
 
-	ui "github.com/asciifaceman/termui"
-	"github.com/asciifaceman/termui/widgets"
+	ui "github.com/asciifaceman/tooey"
+	"github.com/asciifaceman/tooey/widgets"
 )
 
 func main() {

@@ -7,7 +7,7 @@ package widgets
 import (
 	"image"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 // TabPane is a renderable widget which can be used to conditionally render certain tabs/views.

@@ -8,7 +8,7 @@ import (
 	"image"
 	"image/color"
 
-	. "github.com/asciifaceman/termui"
+	. "github.com/asciifaceman/tooey"
 )
 
 type Image struct {
