@@ -1,3 +1,4 @@
+//go:build ignore
 // +build ignore
 
 package main
@@ -9,8 +10,8 @@ import (
 	"math/rand"
 	"time"
 
-	ui "github.com/gizak/termui/v3"
-	"github.com/gizak/termui/v3/widgets"
+	ui "github.com/asciifaceman/termui"
+	"github.com/asciifaceman/termui/widgets"
 )
 
 var run = true

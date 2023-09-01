@@ -8,7 +8,7 @@ import (
 	"image"
 	"sync"
 
-	tb "github.com/nsf/termbox-go"
+	tb "github.com/gdamore/tcell/termbox"
 )
 
 type Drawable interface {
