@@ -5,7 +5,7 @@
 package termui
 
 import (
-	tb "github.com/nsf/termbox-go"
+	tb "github.com/gdamore/tcell/termbox"
 )
 
 // Init initializes termbox-go and is required to render anything.
@@ -14,7 +14,7 @@ func Init() error {
 	if err := tb.Init(); err != nil {
 		return err
 	}
-	tb.SetInputMode(tb.InputEsc | tb.InputMouse)
+	tb.SetInputMode(tb.InputEsc | tb.InputMouse) // TODO: deprecated
 	tb.SetOutputMode(tb.Output256)
 	return nil
 }

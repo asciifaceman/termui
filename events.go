@@ -7,7 +7,7 @@ package termui
 import (
 	"fmt"
 
-	tb "github.com/nsf/termbox-go"
+	tb "github.com/gdamore/tcell/termbox"
 )
 
 /*
@@ -101,7 +101,7 @@ var keyboardMap = map[tb.Key]string{
 	tb.KeyArrowLeft:  "<Left>",
 	tb.KeyArrowRight: "<Right>",
 
-	tb.KeyCtrlSpace:  "<C-<Space>>", // tb.KeyCtrl2 tb.KeyCtrlTilde
+	//tb.KeyCtrlSpace:  "<C-<Space>>", // tb.KeyCtrl2 tb.KeyCtrlTilde // TODO: KeyCtrlSpace doesn't exist in termbox compatibility, needs refactor
 	tb.KeyCtrlA:      "<C-a>",
 	tb.KeyCtrlB:      "<C-b>",
 	tb.KeyCtrlC:      "<C-c>",
@@ -175,7 +175,8 @@ func convertTermboxMouseEvent(e tb.Event) Event {
 	if !ok {
 		converted = "Unknown_Mouse_Button"
 	}
-	Drag := e.Mod == tb.ModMotion
+	// Drag := e.Mod == tb.ModMotion
+	Drag := false // TODO: doesn't exist in termbox compatibility - needs refactor
 	return Event{
 		Type: MouseEvent,
 		ID:   converted,

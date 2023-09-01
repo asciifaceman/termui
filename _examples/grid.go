@@ -13,7 +13,7 @@ import (
 	"time"
 
 	ui "github.com/asciifaceman/termui"
-	"github.com/gizak/termui/v3/widgets"
+	"github.com/asciifaceman/termui/widgets"
 )
 
 func main() {

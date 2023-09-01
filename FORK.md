@@ -40,7 +40,7 @@ package main
 import (
 	"log"
 
-	ui "github.com/asciifaceman/termui"
+	ui "github.com/gizak/termui"
 	"github.com/gizak/termui/v3/widgets"
 )
 
