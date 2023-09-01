@@ -5,7 +5,7 @@ package main
 import (
 	"log"
 
-	ui "github.com/gizak/termui/v3"
+	ui "github.com/asciifaceman/termui"
 	"github.com/gizak/termui/v3/widgets"
 )
 

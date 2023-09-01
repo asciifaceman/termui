@@ -2,6 +2,7 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
+//go:build ignore
 // +build ignore
 
 package main
@@ -9,7 +10,7 @@ package main
 import (
 	"log"
 
-	ui "github.com/gizak/termui/v3"
+	ui "github.com/asciifaceman/termui"
 	"github.com/gizak/termui/v3/widgets"
 )
 

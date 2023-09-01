@@ -1,6 +1,8 @@
-# termui
+# termui reloaded
 
 [<img src="./_assets/demo.gif" alt="demo cast under osx 10.10; Terminal.app; Menlo Regular 12pt.)" width="100%">](./_examples/demo.go)
+
+This is a FORK of gizak/termui
 
 termui is a cross-platform and fully-customizable terminal dashboard and widget library built on top of [termbox-go](https://github.com/nsf/termbox-go). It is inspired by [blessed-contrib](https://github.com/yaronn/blessed-contrib) and [tui-rs](https://github.com/fdehau/tui-rs) and written purely in Go.
 
@@ -14,13 +16,7 @@ termui is a cross-platform and fully-customizable terminal dashboard and widget 
 
 ## Installation
 
-### Go modules
-
-It is not necessary to `go get` termui, since Go will automatically manage any imported dependencies for you. Do note that you have to include `/v3` in the import statements as shown in the 'Hello World' example below.
-
-### Dep
-
-Add with `dep ensure -add github.com/gizak/termui`. With Dep, `/v3` should *not* be included in the import statements.
+`go get github.com/asciifaceman/termui`
 
 ## Hello World
 
@@ -30,8 +26,8 @@ package main
 import (
 	"log"
 
-	ui "github.com/gizak/termui/v3"
-	"github.com/gizak/termui/v3/widgets"
+	ui "github.com/asciifaceman/termui""
+	"github.com/asciifaceman/termui"/widgets"
 )
 
 func main() {
@@ -74,24 +70,7 @@ Run an example with `go run _examples/{example}.go` or run each example consecut
 
 ## Documentation
 
-- [wiki](https://github.com/gizak/termui/wiki)
-
-## Uses
-
-- [dockdash](https://github.com/byrnedo/dockdash)
-- [expvarmon](https://github.com/divan/expvarmon)
-- [go-ethereum/monitorcmd](https://github.com/ethereum/go-ethereum/blob/master/cmd/geth/monitorcmd.go)
-- [go-jira-ui](https://github.com/mikepea/go-jira-ui)
-- [gotop](https://github.com/cjbassi/gotop)
-- [termeter](https://github.com/atsaki/termeter)
-
-## Related Works
-
-- [blessed-contrib](https://github.com/yaronn/blessed-contrib)
-- [gocui](https://github.com/jroimartin/gocui)
-- [termdash](https://github.com/mum4k/termdash)
-- [tui-rs](https://github.com/fdehau/tui-rs)
-- [tview](https://github.com/rivo/tview)
+- [wiki](https://github.com/gizak/asciifaceman/wiki)
 
 ## License
 

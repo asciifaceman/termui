@@ -5,7 +5,7 @@ import (
 	"image"
 	"strings"
 
-	. "github.com/gizak/termui/v3"
+	. "github.com/asciifaceman/termui"
 	rw "github.com/mattn/go-runewidth"
 )
 

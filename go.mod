@@ -1,4 +1,4 @@
-module github.com/gizak/termui/v3
+module github.com/asciifaceman/termui
 
 go 1.15
 
