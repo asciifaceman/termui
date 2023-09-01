@@ -2,37 +2,54 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 import (
 	"image"
 	"sync"
 
-	tb "github.com/gdamore/tcell/termbox"
+	"github.com/gdamore/tcell"
 )
 
+// Drawable represents an item that can be Rendered
 type Drawable interface {
 	GetRect() image.Rectangle
+	// SetRect x1, y1, x2, y2
 	SetRect(int, int, int, int)
-	Draw(*Buffer)
+	X1() int
+	X2() int
+	Y1() int
+	Y2() int
+	Draw(tcell.Screen)
 	sync.Locker
 }
 
 func Render(items ...Drawable) {
 	for _, item := range items {
-		buf := NewBuffer(item.GetRect())
 		item.Lock()
-		item.Draw(buf)
+		item.Draw(scrn)
 		item.Unlock()
-		for point, cell := range buf.CellMap {
-			if point.In(buf.Rectangle) {
-				tb.SetCell(
-					point.X, point.Y,
-					cell.Rune,
-					tb.Attribute(cell.Style.Fg+1)|tb.Attribute(cell.Style.Modifier), tb.Attribute(cell.Style.Bg+1),
-				)
-			}
-		}
 	}
-	tb.Flush()
+	scrn.Show()
 }
+
+//func Render2(items ...Drawable) {
+//	for _, item := range items {
+//		buf := NewBuffer(item.GetRect())
+//		item.Lock()
+//		item.Draw(buf)
+//		item.Unlock()
+//		//for point, cell := range buf.CellMap {
+//		//	if point.In(buf.Rectangle) {
+//		//		fmt.Println(cell)
+//		//		//tb.SetCell(
+//		//		//	point.X, point.Y,
+//		//		//	cell.Rune,
+//		//		//	tb.Attribute(cell.Style.Fg+1)|tb.Attribute(cell.Style.Modifier), tb.Attribute(cell.Style.Bg+1),
+//		//		//)
+//		//	}
+//		//}
+//	}
+//	//tcell.Fl
+//}
+//

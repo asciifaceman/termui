@@ -2,9 +2,11 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
-var StandardColors = []Color{
+import "github.com/gdamore/tcell"
+
+var StandardColors = []tcell.Color{
 	ColorRed,
 	ColorGreen,
 	ColorYellow,
@@ -48,19 +50,19 @@ type BlockTheme struct {
 }
 
 type BarChartTheme struct {
-	Bars   []Color
+	Bars   []tcell.Color
 	Nums   []Style
 	Labels []Style
 }
 
 type GaugeTheme struct {
-	Bar   Color
+	Bar   tcell.Color
 	Label Style
 }
 
 type PlotTheme struct {
-	Lines []Color
-	Axes  Color
+	Lines []tcell.Color
+	Axes  tcell.Color
 }
 
 type ListTheme struct {
@@ -78,16 +80,16 @@ type ParagraphTheme struct {
 }
 
 type PieChartTheme struct {
-	Slices []Color
+	Slices []tcell.Color
 }
 
 type SparklineTheme struct {
 	Title Style
-	Line  Color
+	Line  tcell.Color
 }
 
 type StackedBarChartTheme struct {
-	Bars   []Color
+	Bars   []tcell.Color
 	Nums   []Style
 	Labels []Style
 }

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 type gridItemType uint
 
@@ -154,7 +154,7 @@ func (g *Grid) Draw(buf *Buffer) {
 		entry.SetRect(x, y, x+w, y+h)
 
 		entry.Lock()
-		entry.Draw(buf)
+		//entry.Draw(buf) // TODO: fix
 		entry.Unlock()
 	}
 }

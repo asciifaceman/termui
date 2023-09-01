@@ -2,34 +2,52 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 import (
-	tb "github.com/gdamore/tcell/termbox"
+	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/encoding"
 )
 
-// Init initializes termbox-go and is required to render anything.
-// After initialization, the library must be finalized with `Close`.
+var scrn tcell.Screen
+
+// Init is refactor of init for tcell operation
 func Init() error {
-	if err := tb.Init(); err != nil {
+	encoding.Register()
+
+	s, err := tcell.NewScreen()
+	if err != nil {
 		return err
 	}
-	tb.SetInputMode(tb.InputEsc | tb.InputMouse) // TODO: deprecated
-	tb.SetOutputMode(tb.Output256)
+	if err = s.Init(); err != nil {
+		return err
+	}
+
+	defaultStyle := tcell.StyleDefault.Background(tcell.ColorBlack).Foreground(tcell.ColorWhite)
+	s.SetStyle(defaultStyle)
+	s.Clear()
+
+	scrn = s
+
 	return nil
 }
 
-// Close closes termbox-go.
+// Close is refactor of close
 func Close() {
-	tb.Close()
+	maybePanic := recover()
+	scrn.Fini()
+	if maybePanic != nil {
+		panic(maybePanic)
+	}
 }
 
 func TerminalDimensions() (int, int) {
-	tb.Sync()
-	width, height := tb.Size()
+	scrn.Sync()
+	width, height := scrn.Size()
 	return width, height
 }
 
 func Clear() {
-	tb.Clear(tb.ColorDefault, tb.Attribute(Theme.Default.Bg+1))
+	scrn.Clear()
+	//tb.Clear(tb.ColorDefault, tb.Attribute(Theme.Default.Bg+1))
 }

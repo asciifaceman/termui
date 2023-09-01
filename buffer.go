@@ -2,11 +2,12 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 import (
 	"image"
 
+	"github.com/mattn/go-runewidth"
 	rw "github.com/mattn/go-runewidth"
 )
 
@@ -14,6 +15,21 @@ import (
 type Cell struct {
 	Rune  rune
 	Style Style
+}
+
+// IsZeroWidth returns true if the rune is a zwc
+func (c *Cell) IsZeroWidth() bool {
+	w := c.Width()
+	if w == 0 {
+		return true
+	} else {
+		return false
+	}
+}
+
+// Width returns the width of the cell's rune
+func (c *Cell) Width() int {
+	return runewidth.RuneWidth(c.Rune)
 }
 
 var CellClear = Cell{

@@ -2,9 +2,10 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
+//go:build windows
 // +build windows
 
-package termui
+package tooey
 
 const (
 	TOP_LEFT     = '+'

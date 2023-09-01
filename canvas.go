@@ -1,4 +1,4 @@
-package termui
+package tooey
 
 import (
 	"image"
@@ -27,17 +27,19 @@ func (c *Canvas) SetLine(p0, p1 image.Point, color Color) {
 }
 
 func (c *Canvas) Draw(buf *Buffer) {
-	for point, cell := range c.Canvas.GetCells() {
-		if point.In(c.Rectangle) {
-			convertedCell := Cell{
-				cell.Rune,
-				Style{
-					Color(cell.Color),
-					ColorClear,
-					ModifierClear,
-				},
-			}
-			buf.SetCell(convertedCell, point)
-		}
-	}
+	//for point, cell := range c.Canvas.GetCells() {
+	//if point.In(c.Rectangle) {
+	//	convertedCell := Cell{
+	//		cell.Rune,
+	//Style{
+	//	Color(cell.Color),
+	//	ColorClear,
+	//	ModifierClear,
+	//},
+	//}
+	//buf.SetCell(convertedCell, point)
+	//}
+	//}
+	// TODO: Revisit - but ignore canvas for now because
+	// wth is going on with drawille?
 }

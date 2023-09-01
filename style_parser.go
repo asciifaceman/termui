@@ -2,10 +2,12 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 import (
 	"strings"
+
+	"github.com/gdamore/tcell"
 )
 
 const (
@@ -32,7 +34,7 @@ const (
 )
 
 // StyleParserColorMap can be modified to add custom color parsing to text
-var StyleParserColorMap = map[string]Color{
+var StyleParserColorMap = map[string]tcell.Color{
 	"red":     ColorRed,
 	"blue":    ColorBlue,
 	"black":   ColorBlack,
@@ -59,11 +61,12 @@ func readStyle(runes []rune, defaultStyle Style) Style {
 		if len(pair) == 2 {
 			switch pair[0] {
 			case tokenFg:
-				style.Fg = StyleParserColorMap[pair[1]]
+				// TODO: Fix once style is sorted
+				//style.Fg = StyleParserColorMap[pair[1]]
 			case tokenBg:
-				style.Bg = StyleParserColorMap[pair[1]]
+				//style.Bg = StyleParserColorMap[pair[1]]
 			case tokenModifier:
-				style.Modifier = modifierMap[pair[1]]
+				//style.Modifier = modifierMap[pair[1]]
 			}
 		}
 	}
