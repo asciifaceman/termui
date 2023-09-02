@@ -8,6 +8,9 @@ tooey is a cross-platform and customizable terminal dashboard and widget library
 
 ## Features
 
+- 24bit colors enabled by TCell
+	- Requires your $TERM to end in `-truecolor`
+	- ex. `export TERM=screen-truecolor`
 - Several premade widgets for common use cases
 - Easily create custom widgets
 - Position widgets either in a relative grid or with absolute coordinates

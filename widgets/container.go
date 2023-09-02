@@ -41,15 +41,13 @@ func NewContainer() *Container {
 }
 
 func (c *Container) Append(d tooey.Drawable) {
-	min := d.GetRect().Min
-	max := d.GetRect().Max
-
-	d.SetRect(c.Rectangle.Min.X+min.X,
-		c.Rectangle.Min.Y+min.Y,
-		c.Rectangle.Min.X+max.X,
-		c.Rectangle.Min.Y+max.Y)
-
-	c.Contents = append(c.Contents, d)
+	// d.SetRect(c.X1()+d.X1()+c.PaddingLeft,
+	//
+	//	c.Y1()+d.Y1()-c.PaddingLeft,
+	//	c.X1()+d.X2()+c.PaddingRight,
+	//	c.Y2()+d.Y2()-c.PaddingBottom)
+	//
+	// c.Contents = append(c.Contents, d)
 }
 
 func (c *Container) drawBorder(s tcell.Screen) {

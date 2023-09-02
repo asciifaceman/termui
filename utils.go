@@ -9,6 +9,7 @@ import (
 	"math"
 	"reflect"
 
+	"github.com/davecgh/go-spew/spew"
 	rw "github.com/mattn/go-runewidth"
 	wordwrap "github.com/mitchellh/go-wordwrap"
 )
@@ -18,7 +19,7 @@ import (
 func InterfaceSlice(slice interface{}) []interface{} {
 	s := reflect.ValueOf(slice)
 	if s.Kind() != reflect.Slice {
-		panic("InterfaceSlice() given a non-slice type")
+		panic(fmt.Sprintf("InterfaceSlice() given a non-slice type: %v [%v]", s.Kind(), spew.Sdump(slice)))
 	}
 
 	ret := make([]interface{}, s.Len())

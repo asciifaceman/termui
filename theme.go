@@ -1,169 +1,54 @@
-// Copyright 2017 Zack Guo <zack.y.guo@gmail.com>. All rights reserved.
-// Use of this source code is governed by a MIT license that can
-// be found in the LICENSE file.
-
 package tooey
 
-import "github.com/gdamore/tcell"
+import (
+	"github.com/gdamore/tcell"
+)
 
-var StandardColors = []tcell.Color{
-	ColorRed,
-	ColorGreen,
-	ColorYellow,
-	ColorBlue,
-	ColorMagenta,
-	ColorCyan,
-	ColorWhite,
+const (
+	DefaultULCorner = tcell.RuneULCorner
+	DefaultURCorner = tcell.RuneURCorner
+	DefaultLLCorner = tcell.RuneLLCorner
+	DefaultLRCorner = tcell.RuneLRCorner
+	DefaultHLine    = tcell.RuneHLine
+	DefaultVLine    = tcell.RuneVLine
+)
+
+// Chars is to enable theming border characters
+type Chars struct {
+	HLine    rune
+	VLine    rune
+	ULCorner rune
+	URCorner rune
+	LLCorner rune
+	LRCorner rune
 }
 
-var StandardStyles = []Style{
-	NewStyle(ColorRed),
-	NewStyle(ColorGreen),
-	NewStyle(ColorYellow),
-	NewStyle(ColorBlue),
-	NewStyle(ColorMagenta),
-	NewStyle(ColorCyan),
-	NewStyle(ColorWhite),
+// NewDefaultChars returns the default character set
+// for borders
+func NewDefaultChars() *Chars {
+	return &Chars{
+		HLine:    DefaultHLine,
+		VLine:    DefaultVLine,
+		ULCorner: DefaultULCorner,
+		URCorner: DefaultURCorner,
+		LLCorner: DefaultLLCorner,
+		LRCorner: DefaultLRCorner,
+	}
 }
 
-type RootTheme struct {
+type Theme struct {
 	Default Style
-
-	Block BlockTheme
-
-	BarChart        BarChartTheme
-	Gauge           GaugeTheme
-	Plot            PlotTheme
-	List            ListTheme
-	Tree            TreeTheme
-	Paragraph       ParagraphTheme
-	PieChart        PieChartTheme
-	Sparkline       SparklineTheme
-	StackedBarChart StackedBarChartTheme
-	Tab             TabTheme
-	Table           TableTheme
+	Element Style
+	Border  Style
+	Title   Style
+	Chars   *Chars
 }
 
-type BlockTheme struct {
-	Title  Style
-	Border Style
-}
-
-type BarChartTheme struct {
-	Bars   []tcell.Color
-	Nums   []Style
-	Labels []Style
-}
-
-type GaugeTheme struct {
-	Bar   tcell.Color
-	Label Style
-}
-
-type PlotTheme struct {
-	Lines []tcell.Color
-	Axes  tcell.Color
-}
-
-type ListTheme struct {
-	Text Style
-}
-
-type TreeTheme struct {
-	Text      Style
-	Collapsed rune
-	Expanded  rune
-}
-
-type ParagraphTheme struct {
-	Text Style
-}
-
-type PieChartTheme struct {
-	Slices []tcell.Color
-}
-
-type SparklineTheme struct {
-	Title Style
-	Line  tcell.Color
-}
-
-type StackedBarChartTheme struct {
-	Bars   []tcell.Color
-	Nums   []Style
-	Labels []Style
-}
-
-type TabTheme struct {
-	Active   Style
-	Inactive Style
-}
-
-type TableTheme struct {
-	Text Style
-}
-
-// Theme holds the default Styles and Colors for all widgets.
-// You can set default widget Styles by modifying the Theme before creating the widgets.
-var Theme = RootTheme{
-	Default: NewStyle(ColorWhite),
-
-	Block: BlockTheme{
-		Title:  NewStyle(ColorWhite),
-		Border: NewStyle(ColorWhite),
-	},
-
-	BarChart: BarChartTheme{
-		Bars:   StandardColors,
-		Nums:   StandardStyles,
-		Labels: StandardStyles,
-	},
-
-	Paragraph: ParagraphTheme{
-		Text: NewStyle(ColorWhite),
-	},
-
-	PieChart: PieChartTheme{
-		Slices: StandardColors,
-	},
-
-	List: ListTheme{
-		Text: NewStyle(ColorWhite),
-	},
-
-	Tree: TreeTheme{
-		Text:      NewStyle(ColorWhite),
-		Collapsed: COLLAPSED,
-		Expanded:  EXPANDED,
-	},
-
-	StackedBarChart: StackedBarChartTheme{
-		Bars:   StandardColors,
-		Nums:   StandardStyles,
-		Labels: StandardStyles,
-	},
-
-	Gauge: GaugeTheme{
-		Bar:   ColorWhite,
-		Label: NewStyle(ColorWhite),
-	},
-
-	Sparkline: SparklineTheme{
-		Title: NewStyle(ColorWhite),
-		Line:  ColorWhite,
-	},
-
-	Plot: PlotTheme{
-		Lines: StandardColors,
-		Axes:  ColorWhite,
-	},
-
-	Table: TableTheme{
-		Text: NewStyle(ColorWhite),
-	},
-
-	Tab: TabTheme{
-		Active:   NewStyle(ColorRed),
-		Inactive: NewStyle(ColorWhite),
-	},
+// DefaultTheme is a basic white foreground and black background for all elements
+var DefaultTheme = &Theme{
+	Default: StyleDefault,
+	Element: StyleClear,
+	Border:  StyleDefault,
+	Title:   StyleDefault,
+	Chars:   NewDefaultChars(),
 }

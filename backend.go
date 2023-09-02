@@ -41,6 +41,13 @@ func Close() {
 	}
 }
 
+// DrawableDimensions is the same as TerminalDimensions -1 to represent visibly drawable space in
+// most terminals
+func DrawableDimensions() (int, int) {
+	width, height := TerminalDimensions()
+	return width - 1, height - 1
+}
+
 func TerminalDimensions() (int, int) {
 	scrn.Sync()
 	width, height := scrn.Size()

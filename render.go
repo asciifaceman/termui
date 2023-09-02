@@ -11,18 +11,31 @@ import (
 	"github.com/gdamore/tcell"
 )
 
-// Drawable represents an item that can be Rendered
+// Drawable represents a renderable item
 type Drawable interface {
 	GetRect() image.Rectangle
+	GetInnerRect() image.Rectangle
 	// SetRect x1, y1, x2, y2
 	SetRect(int, int, int, int)
-	X1() int
-	X2() int
-	Y1() int
-	Y2() int
 	Draw(tcell.Screen)
+	SetTheme(*Theme)
 	sync.Locker
 }
+
+// Drawable represents an item that can be Rendered
+//type Drawable interface {
+//	GetRect() image.Rectangle
+//	// SetRect x1, y1, x2, y2
+//	SetRect(int, int, int, int)
+//	X1() int
+//	X2() int
+//	Y1() int
+//	Y2() int
+//	DrawableWidth() int
+//	DrawableHeight() int
+//	Draw(tcell.Screen)
+//	sync.Locker
+//}
 
 func Render(items ...Drawable) {
 	for _, item := range items {

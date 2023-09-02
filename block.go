@@ -32,14 +32,14 @@ type Block struct {
 
 func NewBlock() *Block {
 	return &Block{
-		Border:       true,
-		BorderStyle:  Theme.Block.Border,
+		Border: true,
+		//BorderStyle:  Theme.Element.Border,
 		BorderLeft:   true,
 		BorderRight:  true,
 		BorderTop:    true,
 		BorderBottom: true,
 
-		TitleStyle: Theme.Block.Title,
+		//TitleStyle: Theme.Block.Title,
 	}
 }
 

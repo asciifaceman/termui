@@ -45,6 +45,11 @@ var StyleDefault = Style{
 	Style: tcell.StyleDefault.Foreground(ColorWhite).Background(ColorBlack),
 }
 
+// StyleClassicTerminal is a classic green-on-black terminal styling
+var StyleClassicTerminal = Style{
+	Style: tcell.StyleDefault.Foreground(tcell.ColorLightGreen).Background(tcell.ColorBlack),
+}
+
 // Value returns the underlying tcell.Style of this wrapper
 func (s *Style) Value() tcell.Style {
 	return s.Style
