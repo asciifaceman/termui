@@ -1,8 +1,25 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [WIP] - Fork is going to be dramatically messy and difficult to changelog
+
+### Kludged (added, changed, mutated, glopped)
+* Ripped out Buffer, StyleParser, and a bunch of things
+* Ported to using tcell v2 for backend
+* Implemented Element which replaces Block
+* Implemented Text which replaces Paragraph
+* Moved Title and Border into their own structs with their own Draw calls, although they are not technically Drawables. Subelement? 
+* Implemented Container which does flex-like layout
+* Started poorly wrapping tcell colors for local use
+* Started on revamped theme system and some premade themes
+
+# FORK POINT 
 
 ## [Unreleased]
 

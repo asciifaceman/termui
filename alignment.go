@@ -1,4 +1,4 @@
-package termui
+package tooey
 
 type Alignment uint
 

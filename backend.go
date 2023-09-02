@@ -2,34 +2,64 @@
 // Use of this source code is governed by a MIT license that can
 // be found in the LICENSE file.
 
-package termui
+package tooey
 
 import (
-	tb "github.com/gdamore/tcell/termbox"
+	"github.com/gdamore/tcell/v2"
+	"github.com/gdamore/tcell/v2/encoding"
 )
 
-// Init initializes termbox-go and is required to render anything.
-// After initialization, the library must be finalized with `Close`.
+var scrn tcell.Screen
+
+// Init is refactor of init for tcell operation
 func Init() error {
-	if err := tb.Init(); err != nil {
+	// This says it is deprecated and you only need to import the package
+	// but autoimport removes unused imports so...
+	encoding.Register()
+
+	s, err := tcell.NewScreen()
+	if err != nil {
 		return err
 	}
-	tb.SetInputMode(tb.InputEsc | tb.InputMouse) // TODO: deprecated
-	tb.SetOutputMode(tb.Output256)
+	if err = s.Init(); err != nil {
+		return err
+	}
+
+	defaultStyle := tcell.StyleDefault.Background(tcell.ColorBlack).Foreground(tcell.ColorWhite)
+	s.SetStyle(defaultStyle)
+	s.Clear()
+
+	scrn = s
+
 	return nil
 }
 
-// Close closes termbox-go.
+// Close is refactor of close
 func Close() {
-	tb.Close()
+	maybePanic := recover()
+	scrn.Fini()
+	if maybePanic != nil {
+		panic(maybePanic)
+	}
 }
 
+// DrawableDimensions is the same as TerminalDimensions -1 to represent visibly drawable space in
+// most terminals
+func DrawableDimensions() (int, int) {
+	width, height := TerminalDimensions()
+	return width - 1, height - 1
+}
+
+// Terminal dimensions returns an aggregate dimension for the terminal
+// but it often is clipped on the right and buttom
+// Use DrawableDimensions to get visible terminal dimensions
 func TerminalDimensions() (int, int) {
-	tb.Sync()
-	width, height := tb.Size()
+	scrn.Sync()
+	width, height := scrn.Size()
 	return width, height
 }
 
+// Clear the global screen
 func Clear() {
-	tb.Clear(tb.ColorDefault, tb.Attribute(Theme.Default.Bg+1))
+	scrn.Clear()
 }

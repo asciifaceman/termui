@@ -3,6 +3,6 @@
 // be found in the LICENSE file.
 
 /*
-Package termui is a library for creating terminal user interfaces (TUIs) using widgets.
+package tooey is a library for creating terminal user interfaces (TUIs) using widgets.
 */
-package termui
+package tooey

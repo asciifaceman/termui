@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"log"
 
-	ui "github.com/asciifaceman/termui"
+	ui "github.com/asciifaceman/tooey"
 )
 
 // logs all events to the termui window

@@ -1,23 +1,23 @@
-package termui
+package tooey
+
+import "github.com/gdamore/tcell/v2"
 
 // Color is an integer from -1 to 255
 // -1 = ColorClear
 // 0-255 = Xterm colors
-type Color int
-
-// ColorClear clears the Fg or Bg color of a Style
-const ColorClear Color = -1
+type Color tcell.Color
 
 // Basic terminal colors
 const (
-	ColorBlack   Color = 0
-	ColorRed     Color = 1
-	ColorGreen   Color = 2
-	ColorYellow  Color = 3
-	ColorBlue    Color = 4
-	ColorMagenta Color = 5
-	ColorCyan    Color = 6
-	ColorWhite   Color = 7
+	ColorClear   tcell.Color = tcell.ColorDefault
+	ColorBlack   tcell.Color = tcell.ColorBlack
+	ColorRed     tcell.Color = tcell.ColorRed
+	ColorGreen   tcell.Color = tcell.ColorGreen
+	ColorYellow  tcell.Color = tcell.ColorYellow
+	ColorBlue    tcell.Color = tcell.ColorBlue
+	ColorMagenta tcell.Color = tcell.ColorDarkMagenta
+	ColorCyan    tcell.Color = tcell.ColorLightCyan
+	ColorWhite   tcell.Color = tcell.ColorWhite
 )
 
 type Modifier uint
@@ -32,34 +32,29 @@ const (
 
 // Style represents the style of one terminal cell
 type Style struct {
-	Fg       Color
-	Bg       Color
-	Modifier Modifier
+	tcell.Style
 }
 
-// StyleClear represents a default Style, with no colors or modifiers
+// StyleClear represents an empty Style, with no colors or modifiers
 var StyleClear = Style{
-	Fg:       ColorClear,
-	Bg:       ColorClear,
-	Modifier: ModifierClear,
+	Style: tcell.StyleDefault,
 }
 
-// NewStyle takes 1 to 3 arguments
-// 1st argument = Fg
-// 2nd argument = optional Bg
-// 3rd argument = optional Modifier
-func NewStyle(fg Color, args ...interface{}) Style {
-	bg := ColorClear
-	modifier := ModifierClear
-	if len(args) >= 1 {
-		bg = args[0].(Color)
-	}
-	if len(args) == 2 {
-		modifier = args[1].(Modifier)
-	}
-	return Style{
-		fg,
-		bg,
-		modifier,
-	}
+// StyleDefault represents a simple white on black default
+var StyleDefault = Style{
+	Style: tcell.StyleDefault.Foreground(ColorWhite).Background(ColorBlack),
+}
+
+// StyleClassicTerminal is a classic green-on-black terminal styling
+var StyleClassicTerminal = Style{
+	Style: tcell.StyleDefault.Foreground(tcell.ColorLightGreen).Background(tcell.ColorBlack),
+}
+
+// Value returns the underlying tcell.Style of this wrapper
+func (s *Style) Value() tcell.Style {
+	return s.Style
+}
+
+func NewStyle(fg tcell.Color, args ...interface{}) Style {
+	return StyleClear
 }
