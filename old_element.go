@@ -4,7 +4,7 @@ import (
 	"image"
 	"sync"
 
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 // NewOldElement returns a new stable OldElement that

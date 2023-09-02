@@ -10,7 +10,7 @@ import (
 	"image"
 
 	"github.com/asciifaceman/tooey"
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 // NewText returns a basic empty *Text

@@ -2,7 +2,7 @@ package widgets
 
 import (
 	"github.com/asciifaceman/tooey"
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 // Container is an Element which holds

@@ -1,6 +1,6 @@
 package tooey
 
-import "github.com/gdamore/tcell"
+import "github.com/gdamore/tcell/v2"
 
 // Color is an integer from -1 to 255
 // -1 = ColorClear

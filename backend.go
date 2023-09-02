@@ -5,14 +5,16 @@
 package tooey
 
 import (
-	"github.com/gdamore/tcell"
-	"github.com/gdamore/tcell/encoding"
+	"github.com/gdamore/tcell/v2"
+	"github.com/gdamore/tcell/v2/encoding"
 )
 
 var scrn tcell.Screen
 
 // Init is refactor of init for tcell operation
 func Init() error {
+	// This says it is deprecated and you only need to import the package
+	// but autoimport removes unused imports so...
 	encoding.Register()
 
 	s, err := tcell.NewScreen()
@@ -48,13 +50,16 @@ func DrawableDimensions() (int, int) {
 	return width - 1, height - 1
 }
 
+// Terminal dimensions returns an aggregate dimension for the terminal
+// but it often is clipped on the right and buttom
+// Use DrawableDimensions to get visible terminal dimensions
 func TerminalDimensions() (int, int) {
 	scrn.Sync()
 	width, height := scrn.Size()
 	return width, height
 }
 
+// Clear the global screen
 func Clear() {
 	scrn.Clear()
-	//tb.Clear(tb.ColorDefault, tb.Attribute(Theme.Default.Bg+1))
 }

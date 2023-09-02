@@ -11,6 +11,7 @@ import (
 
 	"github.com/davecgh/go-spew/spew"
 	rw "github.com/mattn/go-runewidth"
+	wordwrap "github.com/mitchellh/go-wordwrap"
 )
 
 // InterfaceSlice takes an []interface{} represented as an interface{} and converts it
@@ -149,4 +150,82 @@ func MinInt(x, y int) int {
 		return x
 	}
 	return y
+}
+
+// []Cell ----------------------------------------------------------------------
+
+// WrapCells takes []Cell and inserts Cells containing '\n' wherever a linebreak should go.
+func WrapCells(cells []Cell, width uint) []Cell {
+	str := CellsToString(cells)
+	wrapped := wordwrap.WrapString(str, width)
+	wrappedCells := []Cell{}
+	i := 0
+	for _, _rune := range wrapped {
+		if _rune == '\n' {
+			wrappedCells = append(wrappedCells, Cell{_rune, StyleClear})
+		} else {
+			wrappedCells = append(wrappedCells, Cell{_rune, cells[i].Style})
+		}
+		i++
+	}
+	return wrappedCells
+}
+
+func RunesToStyledCells(runes []rune, style Style) []Cell {
+	cells := []Cell{}
+	for _, _rune := range runes {
+		cells = append(cells, Cell{_rune, style})
+	}
+	return cells
+}
+
+func CellsToString(cells []Cell) string {
+	runes := make([]rune, len(cells))
+	for i, cell := range cells {
+		runes[i] = cell.Rune
+	}
+	return string(runes)
+}
+
+func TrimCells(cells []Cell, w int) []Cell {
+	s := CellsToString(cells)
+	s = TrimString(s, w)
+	runes := []rune(s)
+	newCells := []Cell{}
+	for i, r := range runes {
+		newCells = append(newCells, Cell{r, cells[i].Style})
+	}
+	return newCells
+}
+
+func SplitCells(cells []Cell, r rune) [][]Cell {
+	splitCells := [][]Cell{}
+	temp := []Cell{}
+	for _, cell := range cells {
+		if cell.Rune == r {
+			splitCells = append(splitCells, temp)
+			temp = []Cell{}
+		} else {
+			temp = append(temp, cell)
+		}
+	}
+	if len(temp) > 0 {
+		splitCells = append(splitCells, temp)
+	}
+	return splitCells
+}
+
+type CellWithX struct {
+	X    int
+	Cell Cell
+}
+
+func BuildCellWithXArray(cells []Cell) []CellWithX {
+	cellWithXArray := make([]CellWithX, len(cells))
+	index := 0
+	for i, cell := range cells {
+		cellWithXArray[i] = CellWithX{X: index, Cell: cell}
+		index += rw.RuneWidth(cell.Rune)
+	}
+	return cellWithXArray
 }

@@ -2,7 +2,7 @@ package themes
 
 import (
 	"github.com/asciifaceman/tooey"
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 var StyleRetroOrangeTerminal = tooey.Style{

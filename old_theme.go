@@ -4,7 +4,7 @@
 
 package tooey
 
-import "github.com/gdamore/tcell"
+import "github.com/gdamore/tcell/v2"
 
 var StandardColors = []tcell.Color{
 	ColorRed,

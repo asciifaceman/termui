@@ -1,6 +1,6 @@
 package tooey
 
-import "github.com/gdamore/tcell"
+import "github.com/gdamore/tcell/v2"
 
 // NewDefaultBorder returns a border with the default character set
 func NewDefaultBorder(theme *Theme) *Border {

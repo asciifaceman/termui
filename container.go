@@ -1,16 +1,16 @@
 package tooey
 
 import (
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 type FlexDirection uint
 
 const (
-	FlexColumn FlexDirection = iota
-	FlexColumnReverse
+	FlexColumn        FlexDirection = iota
+	FlexColumnReverse               // NOT IMPLEMENTED
 	FlexRow
-	FlexRowReverse
+	FlexRowReverse // NOT IMPLEMENTED
 )
 
 // NewContainer ...
@@ -37,7 +37,7 @@ type ContainerChild struct {
 	Grow     float64
 }
 
-// NewFlexChild ...
+// NewFlexChild produces a ContainerChild which can be Wrapped
 func NewFlexChild(grow float64, i ...interface{}) ContainerChild {
 	_, ok := i[0].(Drawable)
 	child := i[0]
@@ -84,19 +84,6 @@ func (c *Container) RecursiveWrap(child ContainerChild) {
 
 }
 
-/*
-	Grow represents an amount of total Flex a child consumes
-
-	Child 1: 1
-	Child 2: 1
-	Child 3: 2
-
-	total flex: 4
-
-	child 1 consumes: 1 /4 (0.25%)
-	total width = 100 | child 1 consumes 25 width
-*/
-
 // DrawFlexRow will draw the contents as a flexible row
 func (c *Container) DrawFlexRow(s tcell.Screen) {
 
@@ -134,94 +121,67 @@ func (c *Container) DrawFlexRow(s tcell.Screen) {
 		lastPosition = x + w + 1
 
 	}
-
-	/*
-	   //childCount := len(c.Children)
-	   flexCount := 0.0
-
-	   	for _, child := range c.Children {
-	   		flexCount += child.Grow
-	   	}
-
-	   	if flexCount < 1 {
-	   		flexCount = 1.0
-	   	}
-
-	   avgWidth := c.DrawableWidth() / int(flexCount)
-
-	   	for i, child := range c.Children {
-	   		if !child.Drawable {
-	   			panic("somehow got non drawable child in Draw")
-	   		}
-
-	   		xratio := child.Grow / flexCount
-
-	   		drawableChild := child.Contents.(Drawable)
-
-	   		width := float64(c.DrawableWidth())
-
-	   		x1 := int(width*xratio) + c.InnerX1()*i
-
-	   		//x1 := c.InnerX1() + (avgWidth * i) + c.Padding.Left
-	   		//x2 := x1 + (avgWidth * int(child.Grow)) - c.Padding.Right
-
-	   		drawableChild.SetRect(x1, c.InnerY1(), x1+avgWidth, c.InnerY2())
-
-	   		drawableChild.Lock()
-	   		drawableChild.Draw(s)
-	   		drawableChild.Unlock()
-
-	   }
-	*/
 }
 
 // DrawFlexColumn will draw the contents as a flexible column
 func (c *Container) DrawFlexColumn(s tcell.Screen) {
+	totalFlex := c.calcFlex()
 
+	height := float64(c.GetInnerRect().Dy())
+
+	lastPosition := c.InnerY1()
+
+	for _, child := range c.Children {
+		childRatio := child.Grow / totalFlex
+		childHeight := height * childRatio
+
+		drawableChild := child.Contents.(Drawable)
+
+		x := c.InnerX1()
+		y := lastPosition
+		w := c.InnerX2()
+		h := int(childHeight)
+
+		if y+h > c.GetInnerRect().Dy() {
+			h--
+		}
+
+		drawableChild.SetRect(x, y, w, y+h)
+
+		drawableChild.Lock()
+		drawableChild.Draw(s)
+		drawableChild.Unlock()
+
+		lastPosition = y + h + 1
+	}
 }
 
-//
-
+// Draw draws the row or col flex and their children
 func (c *Container) Draw(s tcell.Screen) {
 	c.Element.Draw(s)
 
 	switch c.Direction {
 	case FlexColumn:
 		c.DrawFlexColumn(s)
+	case FlexColumnReverse:
+		panic("FlexColumnReverse not yet implemented")
 	case FlexRow:
 		c.DrawFlexRow(s)
+	case FlexRowReverse:
+		panic("FlexRowReverse not yet implemented")
 	default:
-		panic("no direction set!")
+		panic("No flex direction selected")
 	}
-	/*
-		childCount := len(c.Children)
 
-		for i, child := range c.Children {
-			if !child.Drawable {
-				continue
-			}
+}
 
-			avgWidth := c.DrawableWidth() / childCount
+// calcFlex just adds up the flex Grows across the container's children
+func (c *Container) calcFlex() float64 {
+	totalFlex := 0.0
 
-			x := c.InnerX1() + (avgWidth * i) + c.Padding.Left
+	for _, child := range c.Children {
+		totalFlex += child.Grow
+	}
 
-			child.Contents.(Drawable).SetRect(x, c.InnerY1(), x+avgWidth-c.Padding.Right, c.InnerY2())
-
-			child.Contents.(Drawable).Draw(s)
-		}
-	*/
-	//
-	//	childCount := len(c.Children)
-	//
-	//	for i, child := range c.Children {
-	//		avgWidth := c.DrawableWidth() / childCount
-	//		//height := c.DrawableHeight()
-	//
-	//		x := c.InnerX1() + (avgWidth * i) + c.Padding.Left
-	//
-	//		child.SetRect(x, c.InnerY1(), x+avgWidth-c.Padding.Right, c.InnerY2())
-	//
-	//		child.Draw(s)
-	//	}
-
+	return totalFlex
 }

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 )
 
 // NewTitle returns a basic empty title
@@ -22,6 +22,7 @@ type Title struct {
 	Style   Style
 }
 
+// Draw the title
 func (t *Title) Draw(s tcell.Screen, rect *Rectangle) {
 	if len(t.Content) == 0 {
 		return
